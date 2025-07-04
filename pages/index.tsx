@@ -32,14 +32,24 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <h1 className={styles.title}>Whats trending today?</h1>
         <h2>Fetched Count = {fetchedcount}</h2>
-        {news.map((article, index) => (
-          <div key={index}>
-            <a href={article.url} target="_blank" rel="noopener noreferrer">
-              {article.title}
-            </a>
-            <p>{article.publishedAt}</p>
-          </div>
-        ))}
+        <div className={styles.grid}>
+          {news
+            .filter((article) => article.urlToImage) // only articles with images
+            .map((article, index) => (
+              <div className={styles.card} key={index}>
+                <div className={styles.cardcontent}>
+                <a href={article.url} target="_blank" rel="noopener noreferrer">
+                  <img
+                    className={styles.newsimg}
+                    src={article.urlToImage}
+                    alt={article.title}
+                  />
+                  <h3 className={styles.imgtitle}>{article.title}</h3>
+                </a>
+                </div>
+              </div>
+            ))}
+        </div>
       </main>
     </div>
   );

@@ -67,22 +67,23 @@
 
 .grid {
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
-  max-width: 800px;
+  align-content: start;
+  gap: 20px;
+  justify-items: center;
+  margin: 0 auto;
 }
 
 .card {
-  margin: 1rem;
-  padding: 1.5rem;
+  padding: 1rem;
   text-align: left;
   color: inherit;
   text-decoration: none;
   border: 1px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
+  height: fit-content;
+  background: #fff;
 }
 
 .card:hover,
@@ -101,6 +102,34 @@
   margin: 0;
   font-size: 1.25rem;
   line-height: 1.5;
+}
+
+.cardcontent {
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+
+.newsimg {
+  height: 200px;
+  width: auto; /* allows natural width */
+  max-width: 100%; /* prevents overflow */
+  display: block;
+  margin: 0 auto; /* center image horizontally within card */
+  object-fit: contain; /* ensures full image is visible */
+  border-radius: 10px;
+}
+
+
+.imgtitle {
+  display: block;
+  width: 250px;         /* fixed width of 250px */
+  white-space: nowrap;  /* keeps text on a single line */
+  overflow: hidden;     /* hides overflow */
+  text-overflow: ellipsis; /* shows '...' when text overflows */
+  margin: 8px auto 0 auto;
+  font-size: 1rem;
+  text-align: center;
 }
 
 .logo {
