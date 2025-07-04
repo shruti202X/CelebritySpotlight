@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function CelebSearch() {
+  const router = useRouter();
   const [searchInput, setSearchInput] = useState("");
   const [celebOptions, setCelebOptions] = useState([]);
   const [selectedCeleb, setSelectedCeleb] = useState("");
@@ -16,6 +18,8 @@ export default function CelebSearch() {
 
     const geminiOutput = await response.json();
 
+    console.log("Gemini API Output: " + geminiOutput.text);
+
     const names = geminiOutput.text
       .split(",")
       .map((name) => name.trim())
@@ -24,13 +28,38 @@ export default function CelebSearch() {
     setCelebOptions(names);
   };
 
-  const handleSelect = (e) => {
-    setSelectedCeleb(e.target.value);
+  const handleSelect = async (e) => {
+    const newCeleb = e.target.value;
+    setSelectedCeleb(newCeleb);
+
+    const response = await fetch("/api/gemini2", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ celebName: newCeleb }),
+    });
+    const data = await response.json();
+
+    console.log("Gemini2 API Output: " + data.text);
+
+    const data_list = data.text.split(",").map((name) => name.trim());
+
+    router.push({
+      pathname: "/signup",
+      query: {
+        name: newCeleb,
+        genre: data_list[0],
+        country: data_list[1],
+        socialmedia: data_list[2],
+        followers: data_list[3],
+        topwork: data_list[4],
+        secondtopwork: data_list[5],
+      },
+    });
   };
 
   return (
     <div style={{ maxWidth: "500px", margin: "20px auto" }}>
-      <h2>Can't remember the celebrity name?</h2>
+      <h2>Find your celebrity</h2>
 
       <input
         type="text"
@@ -67,7 +96,6 @@ export default function CelebSearch() {
           </select>
         </div>
       )}
-
       {selectedCeleb && (
         <p style={{ marginTop: "20px" }}>
           You selected: <strong>{selectedCeleb}</strong>

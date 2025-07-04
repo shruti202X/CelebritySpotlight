@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
     contents:
-      "I want a minimum of one and a maximum of three celebrity names separated by comma's which are associate with the statement \"" +
+      "I want a minimum of one and a maximum of five celebrity names separated by comma's which are associate with the statement \"" +
       req.body.prompt +
       '". Just give me the output in a single comma separated line',
   });
