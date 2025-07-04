@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Navbar from "../components/Navbar";
+import CelebSearch from "../components/CelebSearch";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Home: NextPage = () => {
@@ -10,21 +11,6 @@ const Home: NextPage = () => {
   const [fetchedcount, setFetchedcount] = useState(0);
 
   useEffect(() => {
-    async function testGeminiAPI() {
-      const response = await fetch("/api/gemini", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          prompt: "Labudu",
-        }),
-      });
-
-      const data = await response.json();
-      console.log("Gemini API response:", data.text);
-    }
-
-    testGeminiAPI();
-
     async function fetchNews() {
       const response = await fetch("/api/news");
       const data = await response.json();
@@ -49,6 +35,7 @@ const Home: NextPage = () => {
         <Navbar />
         <h1 className={styles.title}>Whats trending today?</h1>
         <h2>Fetched Count = {fetchedcount}</h2>
+        <CelebSearch />
         <div className={styles.grid}>
           {news
             .filter((article) => article.urlToImage) // only articles with images
