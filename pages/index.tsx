@@ -12,7 +12,7 @@ const Home: NextPage = () => {
     async function fetchNews() {
       const response = await fetch("/api/news");
       const data = await response.json();
-      setNews(data.results);
+      setNews(data.articles);
       setFetchedcount((prev) => prev + 1);
     }
     fetchNews();
@@ -32,22 +32,12 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <h1 className={styles.title}>Whats trending today?</h1>
         <h2>Fetched Count = {fetchedcount}</h2>
-        {news.map((celeb) => (
-          <div key={celeb.name}>
-            <h2>{celeb.name}</h2>
-            <ul>
-              {celeb.articles.map((article, index) => (
-                <li key={index}>
-                  <a
-                    href={article.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {article.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
+        {news.map((article, index) => (
+          <div key={index}>
+            <a href={article.url} target="_blank" rel="noopener noreferrer">
+              {article.title}
+            </a>
+            <p>{article.publishedAt}</p>
           </div>
         ))}
       </main>
