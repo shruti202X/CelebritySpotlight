@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import Navbar from "../components/Navbar";
 
 const Home: NextPage = () => {
   const [news, setNews] = useState([]);
@@ -30,6 +30,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
+        <Navbar />
         <h1 className={styles.title}>Whats trending today?</h1>
         <h2>Fetched Count = {fetchedcount}</h2>
         <div className={styles.grid}>
@@ -38,14 +39,18 @@ const Home: NextPage = () => {
             .map((article, index) => (
               <div className={styles.card} key={index}>
                 <div className={styles.cardcontent}>
-                <a href={article.url} target="_blank" rel="noopener noreferrer">
-                  <img
-                    className={styles.newsimg}
-                    src={article.urlToImage}
-                    alt={article.title}
-                  />
-                  <h3 className={styles.imgtitle}>{article.title}</h3>
-                </a>
+                  <a
+                    href={article.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      className={styles.newsimg}
+                      src={article.urlToImage}
+                      alt={article.title}
+                    />
+                    <h3 className={styles.imgtitle}>{article.title}</h3>
+                  </a>
                 </div>
               </div>
             ))}
