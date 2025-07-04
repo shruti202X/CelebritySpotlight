@@ -10,6 +10,21 @@ const Home: NextPage = () => {
   const [fetchedcount, setFetchedcount] = useState(0);
 
   useEffect(() => {
+    async function testGeminiAPI() {
+      const response = await fetch("/api/gemini", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          prompt: "Labudu",
+        }),
+      });
+
+      const data = await response.json();
+      console.log("Gemini API response:", data.text);
+    }
+
+    testGeminiAPI();
+
     async function fetchNews() {
       const response = await fetch("/api/news");
       const data = await response.json();
