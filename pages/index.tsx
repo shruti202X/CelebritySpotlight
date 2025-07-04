@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Navbar from "../components/Navbar";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Home: NextPage = () => {
   const [news, setNews] = useState([]);
