@@ -33,9 +33,8 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <Navbar />
-        <h1 className={styles.title}>Whats trending today?</h1>
-        <h2>Fetched Count = {fetchedcount}</h2>
         <CelebSearch />
+        <h1 className={styles.title}>Whats trending today?</h1>
         <div className={styles.grid}>
           {news
             .filter((article) => article.urlToImage) // only articles with images
